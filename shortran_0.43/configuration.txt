@@ -1,0 +1,247 @@
+#########################################################
+###               define output folder				  ###
+#########################################################
+
+date='demo_2012-05-09'		#name of the output folder
+
+
+
+############################################################
+###             mySQL Server details                     ###
+############################################################
+
+server='localhost'
+user='user'
+password=''
+database='profiles'
+
+
+
+###########################################################
+###             bowtie mapping parameters          		###
+###########################################################
+
+mismatches=2			# maximum mismatches allowed in the seed
+max_maq_err=70			# maximum allowed sum of the quality scores of mismatched bases
+seedlen=25				# seedlength used in the alignments
+no_of_cores=2           # number of cores to be used for mapping from computer
+
+
+#########################################################
+### 	path to directory holding data folders	  	  ###
+#########################################################
+
+fq_file_dir="/Users/test/Desktop/shortran_0.43/demo"
+
+
+
+##########################################################
+###       list data folder names seperated by commas   ###
+##########################################################
+
+lib="GHD-5_sample","GHD-6_sample","GHD-9_sample","GHD-10_sample"
+
+###########################################################
+### 		library names - used in plot legends     	###
+###########################################################
+
+genotype="Mock_wild_type","Wild_type","Mock_NFR1","NFR1"
+
+
+############################################################
+###         provide a reference genome file file 		 ###
+###				(modules 2, 4.1, 5, 6.1, 9)  			 ###
+############################################################
+
+genome_file="/Users/test/Desktop/shortran_0.43/demo/annotation_files/lj_r25_demo.fa"        
+
+
+
+############################################################
+###     annotation file (optional, modules 3.2, 5, 6)    ###
+############################################################
+
+gtf_file="/Users/test/Desktop/shortran_0.43/demo/annotation_files/sample.gtf"
+
+
+
+############################################################
+###    mapped file (optional, module 3.1, 4)             ###
+############################################################
+
+igv_infile=''                 							
+
+
+
+############################################################
+### cluster_infile (optional, module 3, 5, 6.1)          ###
+############################################################
+										
+cluster_infile=''  										
+
+
+
+
+#########################################################
+###       define size range of small RNAs             ###
+#########################################################
+
+min_seq_size=19			
+max_seq_size=24
+
+
+
+#########################################################
+###                 abudance cut-off                  ###
+#########################################################
+
+cutoff=1
+
+
+
+############################################################
+###    			variation score cutoff       			 ###
+############################################################
+
+score_regulation_cutoff=1   
+
+
+
+
+
+
+################### Module 1.1 #############################
+
+Raw_data_filtering=True		# Has to be False to run any part of Module 1.1
+
+adapter_filtering = True
+keep_with_adapter_only=True
+adapter='AATTGGCC'
+trim=0					# Trim bases of 3' end of reads
+
+size_fractionation = True
+
+ErrorCorrection = False
+Path_2_ECHO='/u/vgupta/plant/2012_week23/shortran_0.41/echo_v1_12'
+
+filtering_file=''
+use_only_mapped_reads=False		# Discard all reads not matching a sequence in the filtering_file?
+
+
+####################### Module 1.2 #######################
+Make_profile_files=True
+
+
+################### Module 1.3 ###########################
+Add_output_to_mysql_database=True
+
+
+
+
+
+
+###################### Module 2 ##########################
+Genome_mapping=True
+infile=''
+
+
+
+
+
+
+###################### Module 3.1 ########################
+Cluster_prediction=True		# default is using the simple clustering algorithm
+
+divide_by_size=False		# call clusters separately for different size classes? (Only simpel algorithm)
+abundance_cutoff=75 		# minimum sum of sRNA counts in one cluster
+max_gap_size=50             # gap length
+min_unique_reads=5          # unique sRNAs
+
+NiBLS=False					# use the NiBLS algorithm instead?
+
+Add_cluster_to_mySQL=True
+
+
+####################### Module 3.2 #######################
+Cluster_genomic_region_prediction=True		# annotate clusters with genomic feature information? (gtf_file)
+
+
+
+
+
+
+###################### Module 4.1 #######################
+MiRNA_prediction=False  # default is using mirDeepP
+mi_sequence_file=''
+gff_file=''			# known sRNA annotations
+
+mirDeep_2=False		# Use mirDeep 2 instead of mirDeepP?
+## additional miRDeep2 files:
+miR_known_mature='/Users/test/Desktop/shortran_0.43/demo/annotation_files/ath_mature.fa'	
+miR_related_mature='/Users/test/Desktop/shortran_0.43/demo/annotation_files/lja_mature.fa'
+miR_known_precursor='/Users/test/Desktop/shortran_0.43/demo/annotation_files/ath_stem_loop.fa'
+specie_name='A. thaliana'
+##
+
+
+###################### Module 4.2 ########################
+MiRNA_dataset_mapping=False		## map predicted miRNAs to miRNA_database file. 
+mapping_infile=''
+miRNA_database='/Users/test/Desktop/shortran_0.43/demo/annotation_files/miRBase.fa_T'
+
+
+
+
+
+
+
+###################### Module 5 ##########################
+TasiRNA_prediction=False		# predict tasiRNAs and add information to MySQL database?
+
+
+
+
+
+
+
+
+####################### Module 6 #########################
+Add_annotation_to_mysql_database=True
+annotation_file="/Users/test/Desktop/shortran_0.43/demo/annotation_files/lj_r25_demo.fa","/Users/test/Desktop/shortran_0.43/demo/annotation_files/miRBase.fa_T","/Users/test/Desktop/shortran_0.43/demo/annotation_files/siRNA.fa","/Users/test/Desktop/shortran_0.43/demo/annotation_files/TIGR_Fabaceae_Repeats.v2_0_0.fsa","/Users/test/Desktop/shortran_0.43/demo/annotation_files/NSB_arabdopsis.fasta","/Users/test/Desktop/shortran_0.43/demo/annotation_files/MLotiGenome.fasta"
+add_genomic_region=False
+
+
+
+
+
+
+######################### Module 7 #######################
+Pattern_plot=True			# plot inter-library comparisons
+pattern_plot_file=''
+## change files  'compare_libraries' and 'libraries_reference' in output folder for defining references and for selective plotting
+
+
+
+
+
+
+
+######################## Module 8.1 ###########################
+Find_pattern=True
+infile_for_pattern='' ### empty if profile is same as from module-1
+
+
+######################## Module 8.2 #########################
+Map_pattern=True		# map reads starting with pattern to the reference genome
+infile_for_pattern_map='' ### empty if profile is same as from module-1
+pattern="GAA"
+
+
+
+
+
+
+
+######################## Module 9 ###########################
+MySQL_query=True
+query_infile='query_infile.txt'

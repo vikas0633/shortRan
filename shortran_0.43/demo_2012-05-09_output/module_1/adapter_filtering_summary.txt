@@ -1,0 +1,1 @@
+File_name	Total_redundant_reads	Total_non-redundant_reads	Reads_contained_adapter_in_%

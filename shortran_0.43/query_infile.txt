@@ -1,0 +1,10 @@
+SELECT
+`#Sequence`AS sequence,
+`read_size` AS length, 
+LOG(wild_type_norm/Mock_wild_type_norm) AS wt,
+LOG(NFR1_norm/Mock_NFR1_norm) AS nfr1,
+`miRBase.fa`
+FROM `2012-06-05_profile_19_24_sorted.cut-1_score_1`
+WHERE 
+`miRBase.fa` != 0
+ORDER BY wt DESC;

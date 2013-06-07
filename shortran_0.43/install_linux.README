@@ -1,0 +1,82 @@
+'''
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+'''
+
+### Guidelines for shortran installation on linux platforms
+
+### It is recommended to test-run shortran using the demo data to make sure that all the dependencies are installed correctly.
+
+
+### Step 1
+Install dependencies and make these globally available (add to $PATH)
+a. Install Bowtie (http://bowtie-bio.sourceforge.net/index.shtml)
+b. Install perl (http://www.perl.org/) and python (http://python.org/) if not installed already  
+c. Install python libraries scipy (http://www.scipy.org/) and numpy  (http://numpy.scipy.org/), matlibplot (http://matplotlib.sourceforge.net/)
+d. Install Blast (http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/formatdb_fastacmd.html)
+e. Install MySQL (http://dev.mysql.com/downloads/)
+f. If error correction is needed then install ECHO (http://uc-echo.sourceforge.net/)
+g. If miRNA prediction is needed then install miRDeep-p dependencies (http://faculty.virginia.edu/lilab/miRDP/)
+
+
+### Step 2 
+# Start the MySQL server (you can stop the server using "sudo mysqladmin shutdown")
+sudo mysqld_safe
+# Open a new terminal window and change directory to the shortran folder where demo and script folders are found
+# Setup the MySQL database
+sudo mysql < "mysql_setup.txt"
+
+# The basic MySQL setup produced by the installation script corresponds to the following settings in the configuration.txt file:
+server='localhost'
+user='user'
+password=''
+database='profiles'
+
+
+### Step 3
+# run shortran
+# for the first run, we recommend that you open the "configuration.txt" file in a text editor and replace "/Users/test/Desktop/package_0.31/demo/" with the path to the shortran demo folder on your system.
+# then type
+python shortran.py
+# and type in "n" to run shortran according to the configuration file.
+# If all dependencies are installed correctly, your output folder should look like the "example_output" folder available for download, when the run is finished.
+
+# For later runs, you can either use the configuration.txt file or choose the interactive version, which will guide you through the configuration process.
+
+
+
+
+
+
+### INSTALLATION TROUBLESHOOTING
+
+# Error referring to scipy, numpy or matplotlib
+	-> Check that the libraries are correctly installed
+		python
+		import scipy
+		import numpy
+		import matplotlib
+		exit()
+		If you get errors, reinstall.
+	
+# ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2)
+	->	Start the Mysql server:
+		sudo mysqld_safe
+		
+# ERROR 1044 (42000): Access denied for user ''@'localhost' to database 'profiles'
+	->	Make sure the MySQL database server is running, and then rerun the MySQL setup:
+		sudo mysql < "mysql_setup.txt"
+		Use the settings detailed above in the shortran configuration file.
+
+
+

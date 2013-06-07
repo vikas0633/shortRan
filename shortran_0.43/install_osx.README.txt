@@ -1,0 +1,91 @@
+'''
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+'''
+
+### Guidelines for installation of shortran on MacOS
+
+### install Macports
+http://www.macports.org/install.php
+
+### Install MySQL - use the DMG file.
+http://dev.mysql.com/downloads/mysql/
+
+
+### NOTE! It is important to install Macports and MySQL before running the install_osx.sh installation script.
+
+
+### add MySQL version variable to the install_osx.sh file in the shortran folder, e.g.:
+mysql_version='mysql-5.5.24-osx10.6-x86_64'
+### you should enter the name of the package you downloaded from the MySQL site except for the .dmg extension.
+
+
+### Open a terminal window and run the script install_osx.sh script in the shortran folder
+bash install_osx.sh
+### WARNING! This script installs python 2.6 and selects this at the default python instance on your computer.
+### If you prefer to keep the original MacOS supplied python, please install the dependencies manually instead of running the install script.
+
+### please enter your administrator password when prompted
+### the installation of python and its extensions will take a while (hours, perhaps) - please be patient...
+
+
+### The basic MySQL setup produced by the installation script corresponds to the following settings in the configuration.txt file:
+server='localhost'
+user='user'
+password=''
+database='profiles'
+
+
+### The installation script starts your local mysql server to be able to setup the MySQL user and database.
+### When running shortran later, you can start the mysql server:
+sudo mysqld_safe
+### And stop it again:
+sudo mysqladmin shutdown
+
+
+
+
+### Run shortran
+# for the first run, we recommend that you open the "configuration.txt" file in a text editor and replace "/Users/test/Desktop/package_0.31/demo/" with the path to the shortran demo folder on your system.
+# then type
+python shortran.py
+# and type in "n" to run shortran according to the configuration file.
+# If all dependencies are installed correctly, your output folder should look like the "example_output" folder available for download, when the run is finished.
+# For later runs, you can either use the configuration.txt file or choose the interactive version, which will guide you through the configuration process.
+
+
+
+
+
+
+
+
+
+### INSTALLATION TROUBLESHOOTING
+
+# You get an error referring to scipy, numpy or matplotlib
+	->	check that your path is correctly set
+		echo $PATH
+		It should start with /opt/local/bin:/opt/local/sbin:
+		If not, you can fix it using:
+		export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+		This relates to the system using the python version installed by Macports.
+
+# ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2)
+	->	Start the Mysql server:
+		sudo mysqld_safe
+		
+# ERROR 1044 (42000): Access denied for user ''@'localhost' to database 'profiles'
+	->	Make sure the MySQL database server is running, and then rerun the MySQL setup:
+		sudo mysql < "mysql_setup.txt"
+		Use the settings detailed above in the shortran configuration file.

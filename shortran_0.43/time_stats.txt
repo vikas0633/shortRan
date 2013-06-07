@@ -1,0 +1,7 @@
+adapter filtering/trimming --- starts
+adapter filtering/trimming --- ends time taken: 7.06710481644
+size splitting --- starts
+size splitting --- ends time taken: 0.126739025116
+filtering/error correction --- starts
+filtering/error correction --- ends time taken: 0.0083281993866
+making profile --- starts

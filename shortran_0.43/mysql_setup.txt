@@ -1,0 +1,3 @@
+CREATE DATABASE profiles;
+CREATE USER 'user'@'localhost' IDENTIFIED BY '';
+GRANT ALL PRIVILEGES ON profiles.* TO 'user'@'localhost';
